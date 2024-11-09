@@ -1,21 +1,29 @@
 package Frontend;
 
+import Backend.Shape;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
 public class Program extends javax.swing.JFrame {
     public static Graphics2D g;
+    protected ShapesManager shapesManager;
+    protected javax.swing.JComboBox shapesComboBox;
     public Program() {
         initComponents();
         setTitle("Vector Drawing Application");
         setContentPane(jPanel1);
+        this.shapesComboBox=shapesBox;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         g=(Graphics2D)canvas.getGraphics();
         //To Make Origin(0,0) At Bottom Left Corner
         g.translate(0, canvas.getHeight());
         g.scale(1,-1);
+        this.shapesManager=new ShapesManager();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -30,8 +38,8 @@ public class Program extends javax.swing.JFrame {
         rectButton = new javax.swing.JButton();
         shapesBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        colorize = new javax.swing.JButton();
+        remove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,19 +95,33 @@ public class Program extends javax.swing.JFrame {
         });
 
         shapesBox.setFont(new java.awt.Font("Georgia Pro", 0, 12)); // NOI18N
-        shapesBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         shapesBox.setPreferredSize(new java.awt.Dimension(150, 30));
+        shapesBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shapesBoxActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Georgia Pro", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Select Shape");
         jLabel1.setPreferredSize(new java.awt.Dimension(90, 20));
 
-        jButton1.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jButton1.setText("Colorize");
+        colorize.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        colorize.setText("Colorize");
+        colorize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colorizeActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Georgia Pro", 0, 12)); // NOI18N
-        jButton2.setText("Remove");
+        remove.setFont(new java.awt.Font("Georgia Pro", 0, 12)); // NOI18N
+        remove.setText("Remove");
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,9 +132,9 @@ public class Program extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(colorize)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addComponent(remove))
                     .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,8 +169,8 @@ public class Program extends javax.swing.JFrame {
                         .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
+                            .addComponent(colorize)
+                            .addComponent(remove))))
                 .addContainerGap())
         );
 
@@ -169,21 +191,61 @@ public class Program extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
+        shapesManager.countL++;
         LineDialogBox window=new LineDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_lineButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-
+        shapesManager.countC++;
         CircleDialogBox window=new CircleDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_circleButtonActionPerformed
 
     private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
+        shapesManager.countS++;
         SquareDialogBox window=new SquareDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_squareButtonActionPerformed
 
     private void rectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectButtonActionPerformed
+        shapesManager.countR++;
         RectangleDialogBox window=new RectangleDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_rectButtonActionPerformed
+
+    private void shapesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shapesBoxActionPerformed
+        
+    }//GEN-LAST:event_shapesBoxActionPerformed
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        String selectedShapeString=(String)shapesBox.getSelectedItem();
+        if(selectedShapeString!=null)
+        {
+        this.shapesComboBox.removeItem(selectedShapeString);
+        
+        System.out.println("Shape"+selectedShapeString);
+        Shape shapeToRemove=shapesManager.shapes.get(selectedShapeString);
+        shapesManager.removeShape(shapeToRemove);
+        shapesManager.refresh(g);
+        }
+    }//GEN-LAST:event_removeActionPerformed
+
+    private void colorizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorizeActionPerformed
+        Color currentColor = Color.BLACK;
+        String selectedShapeString = (String) this.shapesComboBox.getSelectedItem();
+        System.out.println("Color :"+selectedShapeString);
+         if(selectedShapeString!=null)
+         {
+             Shape shapeToColor = shapesManager.shapes.get(selectedShapeString);
+             Color newColor;
+                newColor = JColorChooser.showDialog(Program.this, "Select Shape Color", currentColor);
+            if (newColor != null) {
+                System.out.println("Hello");
+                    currentColor = newColor;
+                    shapeToColor.setColor(newColor);
+                    shapeToColor.setFillColor(newColor);
+                    
+                    shapesManager.refresh(g);
+         }
+    }
+    }//GEN-LAST:event_colorizeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,12 +285,12 @@ public class Program extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel canvas;
     private javax.swing.JButton circleButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton colorize;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton lineButton;
     private javax.swing.JButton rectButton;
+    private javax.swing.JButton remove;
     private javax.swing.JComboBox<String> shapesBox;
     private javax.swing.JButton squareButton;
     // End of variables declaration//GEN-END:variables

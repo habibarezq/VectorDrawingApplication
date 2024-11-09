@@ -11,8 +11,8 @@ public class Square extends DefaultShape implements Shape{
     //private double radius;
     private Map<String,Double> properties=new HashMap<>();
 
-    public Square(Point position,double length) {
-        super(position);
+    public Square(Point position,String shapeName,double length) {
+        super(position,shapeName);
         this.properties.put("x", (double)position.x);
         this.properties.put("y",(double)position.y);
         this.properties.put("length", length);
@@ -38,7 +38,6 @@ public class Square extends DefaultShape implements Shape{
     @Override
     public void draw(Graphics canvas) {
         double length=this.properties.get("length");
-        canvas.fillRect((this.getPosition().x)-(int)length,(this.getPosition().y)-(int)length,2*(int)length, 2*(int)length);
         canvas.setColor(this.getColor());
         canvas.drawRect((this.getPosition().x)-(int)length,(this.getPosition().y)-(int)length,2*(int)length, 2*(int)length);
         

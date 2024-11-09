@@ -1,6 +1,7 @@
 
 package Backend;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.HashMap;
@@ -9,8 +10,8 @@ import java.util.Map;
 public class Line extends DefaultShape implements Shape{
     private Map<String,Double> properties=new HashMap<>();
     private Point p2;
-    public Line(Point p1,Point p2) {
-        super(p1);
+    public Line(Point p1,String shapeName,Point p2) {
+        super(p1,shapeName);
         this.p2=p2;
         this.properties.put("x1",(double)p1.x);
         this.properties.put("y1",(double)p1.y);

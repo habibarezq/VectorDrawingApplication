@@ -1,6 +1,7 @@
 
 package Backend;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.HashMap;
@@ -11,8 +12,10 @@ public class Rectangle extends DefaultShape implements Shape{
     //private double radius;
     private Map<String,Double> properties=new HashMap<>();
 
-    public Rectangle(Point position,double width,double height) {
-        super(position);
+    public Rectangle(Point position,String shapeName,double width,double height) {
+        super(position,shapeName);
+        super.setColor(Color.BLACK);
+        super.setFillColor(Color.WHITE);
         this.properties.put("x", (double)position.x);
         this.properties.put("y",(double)position.y);
         this.properties.put("width",width);
@@ -42,7 +45,7 @@ public class Rectangle extends DefaultShape implements Shape{
     public void draw(Graphics canvas) {
         double width=this.properties.get("width");
         double height=this.properties.get("height");
-        canvas.fillRect((this.getPosition().x)-(int)width,(this.getPosition().y)-(int)height,2*(int)width, 2*(int)height);
+        //canvas.drawRect((this.getPosition().x)-(int)width,(this.getPosition().y)-(int)height,2*(int)width, 2*(int)height);
         canvas.setColor(this.getColor());
         canvas.drawRect((this.getPosition().x)-(int)width,(this.getPosition().y)-(int)height,2*(int)width, 2*(int)height);
         

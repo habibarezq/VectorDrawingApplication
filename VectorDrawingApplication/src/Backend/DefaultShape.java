@@ -9,11 +9,21 @@ public abstract class DefaultShape implements Shape {
     private Point position;
     private Color color;
     private Color fillColor;
+    private String shapeName;
 
-    public DefaultShape(Point position) {
+    public DefaultShape(Point position,String shapeName) {
         this.position = position;
-        this.color = new Color(Color.BLACK.getRGB());
-        this.fillColor = new Color(Color.WHITE.getRGB());
+        this.shapeName=shapeName;
+        this.color = Color.BLACK;
+        this.fillColor = Color.WHITE;
+    }
+
+    public String getShapeName() {
+        return shapeName;
+    }
+
+    public void setShapeName(String shapeName) {
+        this.shapeName = shapeName;
     }
     @Override
     public Point getPosition() {
@@ -35,8 +45,17 @@ public abstract class DefaultShape implements Shape {
     @Override
     public void setFillColor(Color fillColor) {
         this.fillColor = fillColor;
+        
     }
     
     
-    
+    @Override
+    public String getName()
+    {
+        if(!this.shapeName.isEmpty())
+            return this.shapeName;
+        else
+            return null;
+        
+    }
 }

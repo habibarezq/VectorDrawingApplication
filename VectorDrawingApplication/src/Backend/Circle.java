@@ -11,9 +11,10 @@ public class Circle extends DefaultShape implements Shape{
     //private double radius;
     private Map<String,Double> properties=new HashMap<>();
 
-    public Circle(Point position,double radius) {
-        super(position);
+    public Circle(Point position,String shapeName,double radius) {
+        super(position,shapeName);
         this.properties.put("radius", radius);
+        
     }
     
     @Override
@@ -30,7 +31,6 @@ public class Circle extends DefaultShape implements Shape{
     @Override
     public void draw(Graphics canvas) {
         double radius=this.properties.get("radius");
-        canvas.fillOval((this.getPosition().x)-(int)radius,(this.getPosition().y)-(int)radius,2*(int)radius, 2*(int)radius);
         canvas.setColor(this.getColor());
         canvas.drawOval((this.getPosition().x)-(int)radius,(this.getPosition().y)-(int)radius,2*(int)radius, 2*(int)radius);
         

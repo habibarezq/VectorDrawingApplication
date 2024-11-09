@@ -186,9 +186,14 @@ public class SquareDialogBox extends javax.swing.JDialog {
             Point p = new Point(x, y);
             if(ValidateFields.validateCoordinates(x,y))
             {
-                Square s=new Square(p,length);
-                main.g.setColor(new Color(Color.WHITE.getRGB()));
+                String shapeName="Square0"+main.shapesManager.countS;
+                Square s=new Square(p,shapeName,length);
+                main.shapesManager.addShape(s);
+//                main.g.setColor(new Color(Color.WHITE.getRGB()));
                 s.draw(main.g);
+                
+                //Add Item to ComboBox
+                main.shapesComboBox.addItem(shapeName);
                 setVisible(false);
                 dispose();
             }

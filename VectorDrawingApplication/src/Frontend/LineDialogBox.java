@@ -210,9 +210,15 @@ public class LineDialogBox extends javax.swing.JDialog {
             Point p2=new Point(x2,y2);
             if(ValidateFields.validateCoordinates(x1,y1) && ValidateFields.validateCoordinates(x2, y2))
             {
-                Line l = new Line(p1,p2);
-                main.g.setColor(Color.BLACK);
+                String shapeName="Line0"+main.shapesManager.countL;
+                Line l = new Line(p1,shapeName,p2);
+                main.shapesManager.addShape(l);
+//                main.g.setColor(Color.BLACK);
                 l.draw(main.g);
+                
+                //Add Item to Combo Box
+                main.shapesComboBox.addItem(shapeName);
+                
                 setVisible(false);
                 dispose();
             }

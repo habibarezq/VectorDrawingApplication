@@ -19,4 +19,6 @@ public interface Shape {
     public void setFillColor(Color color);
     //Redraw the shape on the canvas
     public void draw(java.awt.Graphics canvas0);
+    
+    public String getName();
 }
