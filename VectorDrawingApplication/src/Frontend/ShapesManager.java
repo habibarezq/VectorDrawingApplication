@@ -1,11 +1,9 @@
 package Frontend;
 
-import Backend.DrawingEngine;
-import Backend.Shape;
+import Interfaces.DrawingEngine;
+import Interfaces.Shape;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JPanel;
@@ -19,16 +17,6 @@ public class ShapesManager extends JPanel implements DrawingEngine {
         this.shapes = new HashMap<>();
     }
 
-//    @Override
-//    public void paintComponent(Graphics g)
-//    {
-//        super.paintComponent(g);
-//        for(Shape s: this.getShapes())
-//        {
-//            g.setColor(s.getColor()); // Use each shape's color
-//            s.draw(g);
-//        }
-//    }
     @Override
     public void addShape(Shape shape) {
         shapes.put(shape.getName(), shape);
@@ -42,7 +30,7 @@ public class ShapesManager extends JPanel implements DrawingEngine {
     @Override
     public Shape[] getShapes() {
         ArrayList<Shape> shapesList = new ArrayList<>(shapes.values());
-        return shapesList.toArray(new Shape[0]);
+        return shapesList.toArray(Shape[]::new);
     }
 
     @Override

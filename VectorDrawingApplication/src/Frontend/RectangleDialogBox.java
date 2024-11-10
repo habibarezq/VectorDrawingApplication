@@ -212,15 +212,17 @@ public class RectangleDialogBox extends javax.swing.JDialog {
             Point p = new Point(x, y);
             if(ValidateFields.validateCoordinates(x,y))
             {
+                main.shapesManager.countR++;
                 String shapeName="Rectangle0"+main.shapesManager.countR;
+                
                 Rectangle r = new Rectangle(p,shapeName, w,h);
                 main.shapesManager.addShape(r);
-                //main.g.setColor(new Color(Color.WHITE.getRGB()));
                 r.draw(main.g);
                 
                 //Add Item to Combo Box
                 main.shapesComboBox.addItem(shapeName);
                 
+                //Dispose the properties box
                 setVisible(false);
                 dispose();
             }

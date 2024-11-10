@@ -199,17 +199,17 @@ public class CircleDialogBox extends javax.swing.JDialog {
             Point p = new Point(x, y);
             if(ValidateFields.validateCoordinates(x,y))
             {
+            main.shapesManager.countC++; //Increase Count of Circles drawn
             String shapeName="Circle0"+ main.shapesManager.countC;
             Circle circle = new Circle(p, shapeName, radius);
-            circle.setColor(Color.BLACK);
-            circle.setFillColor(Color.white);
+
             main.shapesManager.addShape(circle);
-//            main.g.setColor(new Color(Color.WHITE.getRGB()));
             circle.draw(main.g);
             
             //Add Item To Combo Box
             main.shapesComboBox.addItem(shapeName);
             
+            //Dispose the properties window
             setVisible(false);
             dispose();
             }

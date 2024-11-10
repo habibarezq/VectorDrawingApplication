@@ -1,11 +1,10 @@
 package Frontend;
 
-import Backend.Shape;
+import Interfaces.Shape;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JColorChooser;
-import javax.swing.JOptionPane;
+
 
 public class Program extends javax.swing.JFrame {
     public static Graphics2D g;
@@ -15,15 +14,18 @@ public class Program extends javax.swing.JFrame {
         initComponents();
         setTitle("Vector Drawing Application");
         setContentPane(jPanel1);
-        this.shapesComboBox=shapesBox;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         g=(Graphics2D)canvas.getGraphics();
+        
+        //Initalize Shape Manager to track shapes 
+        this.shapesComboBox=shapesBox;
+        this.shapesManager=new ShapesManager();
+        
         //To Make Origin(0,0) At Bottom Left Corner
         g.translate(0, canvas.getHeight());
         g.scale(1,-1);
-        this.shapesManager=new ShapesManager();
-        
+         
     }
 
     @SuppressWarnings("unchecked")
@@ -191,22 +193,18 @@ public class Program extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
-        shapesManager.countL++;
         LineDialogBox window=new LineDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_lineButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-        shapesManager.countC++;
         CircleDialogBox window=new CircleDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_circleButtonActionPerformed
 
     private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
-        shapesManager.countS++;
         SquareDialogBox window=new SquareDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_squareButtonActionPerformed
 
     private void rectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectButtonActionPerformed
-        shapesManager.countR++;
         RectangleDialogBox window=new RectangleDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_rectButtonActionPerformed
 
