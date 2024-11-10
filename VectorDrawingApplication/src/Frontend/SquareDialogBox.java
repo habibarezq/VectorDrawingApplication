@@ -1,7 +1,6 @@
 
 package Frontend;
 import Backend.Square;
-import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JOptionPane;
 
@@ -184,7 +183,7 @@ public class SquareDialogBox extends javax.swing.JDialog {
             int x = Integer.parseInt(string_x);
             int y = Integer.parseInt(string_y);
             Point p = new Point(x, y);
-            if(ValidateFields.validateCoordinates(x,y))
+            if(ValidateFields.validateCoordinates(x,y,length))
             {
                 main.shapesManager.countS++;
                 String shapeName="Square0"+main.shapesManager.countS;
@@ -243,14 +242,14 @@ public class SquareDialogBox extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SquareDialogBox dialog = new SquareDialogBox(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+//                SquareDialogBox dialog = new SquareDialogBox(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
             }
         });
     }

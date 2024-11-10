@@ -210,7 +210,7 @@ public class RectangleDialogBox extends javax.swing.JDialog {
             int x = Integer.parseInt(string_x);
             int y = Integer.parseInt(string_y);
             Point p = new Point(x, y);
-            if(ValidateFields.validateCoordinates(x,y))
+            if(ValidateFields.validateCoordinates(x,y,w,h))
             {
                 main.shapesManager.countR++;
                 String shapeName="Rectangle0"+main.shapesManager.countR;
@@ -273,15 +273,15 @@ public class RectangleDialogBox extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RectangleDialogBox dialog = new RectangleDialogBox(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+//                RectangleDialogBox dialog = new RectangleDialogBox(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+             }
         });
     }
 

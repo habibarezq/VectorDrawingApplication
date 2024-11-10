@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package Frontend;
 
 import Backend.Line;
-import static Frontend.CircleDialogBox.main;
-import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author habib
- */
+
 public class LineDialogBox extends javax.swing.JDialog {
 
     private Program main;
@@ -272,14 +264,14 @@ public class LineDialogBox extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LineDialogBox dialog = new LineDialogBox(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+//                LineDialogBox dialog = new LineDialogBox(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
             }
         });
     }

@@ -1,31 +1,43 @@
 package Frontend;
 
 import Interfaces.Shape;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.MediaTracker;
+import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 
-
 public class Program extends javax.swing.JFrame {
-    public static Graphics2D g;
+
+    protected Graphics2D g;
     protected ShapesManager shapesManager;
     protected javax.swing.JComboBox shapesComboBox;
+
     public Program() {
         initComponents();
         setTitle("Vector Drawing Application");
         setContentPane(jPanel1);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        g=(Graphics2D)canvas.getGraphics();
-        
+        g = (Graphics2D) canvas.getGraphics();
+        g.setStroke(new BasicStroke(2));
+
         //Initalize Shape Manager to track shapes 
-        this.shapesComboBox=shapesBox;
-        this.shapesManager=new ShapesManager();
-        
+        this.shapesComboBox = shapesBox;
+        this.shapesManager = new ShapesManager();
+
         //To Make Origin(0,0) At Bottom Left Corner
         g.translate(0, canvas.getHeight());
-        g.scale(1,-1);
-         
+        g.scale(1, -1);
+
+        //Change frame icon
+        ImageIcon image = new ImageIcon("C:/Users/habib/Documents/NetBeansProjects/VectorDrawingApplication/VectorDrawingApplication/src/Frontend/paintIcon.jpg");
+        if (image.getImageLoadStatus() != MediaTracker.COMPLETE) {
+            System.out.println("Icon image failed to load.");
+        }
+        setIconImage(image.getImage());
+
     }
 
     @SuppressWarnings("unchecked")
@@ -193,56 +205,50 @@ public class Program extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineButtonActionPerformed
-        LineDialogBox window=new LineDialogBox(this, rootPaneCheckingEnabled);
+        LineDialogBox window = new LineDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_lineButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-        CircleDialogBox window=new CircleDialogBox(this, rootPaneCheckingEnabled);
+        CircleDialogBox window = new CircleDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_circleButtonActionPerformed
 
     private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
-        SquareDialogBox window=new SquareDialogBox(this, rootPaneCheckingEnabled);
+        SquareDialogBox window = new SquareDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_squareButtonActionPerformed
 
     private void rectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectButtonActionPerformed
-        RectangleDialogBox window=new RectangleDialogBox(this, rootPaneCheckingEnabled);
+        RectangleDialogBox window = new RectangleDialogBox(this, rootPaneCheckingEnabled);
     }//GEN-LAST:event_rectButtonActionPerformed
 
     private void shapesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shapesBoxActionPerformed
-        
+
     }//GEN-LAST:event_shapesBoxActionPerformed
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
-        String selectedShapeString=(String)shapesBox.getSelectedItem();
-        if(selectedShapeString!=null)
-        {
-        this.shapesComboBox.removeItem(selectedShapeString);
-        
-        System.out.println("Shape"+selectedShapeString);
-        Shape shapeToRemove=shapesManager.shapes.get(selectedShapeString);
-        shapesManager.removeShape(shapeToRemove);
-        shapesManager.refresh(g);
+        String selectedShapeString = (String) shapesBox.getSelectedItem();
+        if (selectedShapeString != null) {
+            this.shapesComboBox.removeItem(selectedShapeString);
+            Shape shapeToRemove = shapesManager.shapes.get(selectedShapeString);
+            shapesManager.removeShape(shapeToRemove);
+            shapesManager.refresh(g);
         }
     }//GEN-LAST:event_removeActionPerformed
 
     private void colorizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorizeActionPerformed
         Color currentColor = Color.BLACK;
         String selectedShapeString = (String) this.shapesComboBox.getSelectedItem();
-        System.out.println("Color :"+selectedShapeString);
-         if(selectedShapeString!=null)
-         {
-             Shape shapeToColor = shapesManager.shapes.get(selectedShapeString);
-             Color newColor;
-                newColor = JColorChooser.showDialog(Program.this, "Select Shape Color", currentColor);
+        if (selectedShapeString != null) {
+            Shape shapeToColor = shapesManager.shapes.get(selectedShapeString);
+            Color newColor;
+            newColor = JColorChooser.showDialog(Program.this, "Select Shape Color", currentColor);
             if (newColor != null) {
-                System.out.println("Hello");
-                    currentColor = newColor;
-                    shapeToColor.setColor(newColor);
-                    shapeToColor.setFillColor(newColor);
-                    
-                    shapesManager.refresh(g);
-         }
-    }
+                currentColor = newColor;
+                shapeToColor.setColor(newColor);
+                shapeToColor.setFillColor(newColor);
+
+                shapesManager.refresh(g);
+            }
+        }
     }//GEN-LAST:event_colorizeActionPerformed
 
     /**
