@@ -1,9 +1,7 @@
 package Frontend;
 
 import Backend.Circle;
-import java.awt.MediaTracker;
 import java.awt.Point;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class CircleDialogBox extends javax.swing.JDialog {
