@@ -1,7 +1,7 @@
 
 package Backend;
 
-import java.awt.Color;
+import Interfaces.Shape;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.HashMap;
@@ -46,6 +46,7 @@ public class Line extends DefaultShape implements Shape{
         x2=this.properties.get("x2");
         y1=this.properties.get("y1");
         y2=this.properties.get("y2");
+        canvas.setColor(this.getColor());
         canvas.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
         
     }
