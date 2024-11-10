@@ -3,25 +3,25 @@ package Backend;
 import Interfaces.Shape;
 import java.awt.Color;
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class DefaultShape implements Shape {
-
+    protected Map<String,Double> properties=new HashMap<>();
     private Point position;
     private Color color;
     private Color fillColor;
     private String shapeName;
 
     public DefaultShape(Point position, String shapeName) {
+        //Default Shape implements all getters and setters for Shape interface
         this.position = position;
         this.shapeName = shapeName;
         this.color = Color.BLACK;
         this.fillColor = Color.WHITE;
     }
 
-    public String getShapeName() {
-        return shapeName;
-    }
-
+    @Override
     public void setShapeName(String shapeName) {
         this.shapeName = shapeName;
     }
@@ -51,7 +51,7 @@ public abstract class DefaultShape implements Shape {
         this.fillColor = fillColor;
 
     }
-
+    @Override
     public Color getFillColor() {
         return fillColor;
     }

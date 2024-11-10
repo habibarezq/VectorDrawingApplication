@@ -1,26 +1,22 @@
 
 package Backend;
 
-import Interfaces.Shape;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.HashMap;
 import java.util.Map;
 
 
-public class Rectangle extends DefaultShape implements Shape{
-    //private double radius;
-    private Map<String,Double> properties=new HashMap<>();
+public class Rectangle extends DefaultShape {
 
     public Rectangle(Point position,String shapeName,double width,double height) {
         super(position,shapeName);
         super.setColor(Color.BLACK);
         super.setFillColor(Color.WHITE);
-        this.properties.put("x", (double)position.x);
-        this.properties.put("y",(double)position.y);
-        this.properties.put("width",width);
-        this.properties.put("height",height);
+        super.properties.put("x", (double)position.x);
+        super.properties.put("y",(double)position.y);
+        super.properties.put("width",width);
+        super.properties.put("height",height);
     }
     
     @Override

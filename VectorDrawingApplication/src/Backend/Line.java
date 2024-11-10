@@ -1,19 +1,16 @@
 
 package Backend;
 
-import Interfaces.Shape;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.HashMap;
 import java.util.Map;
 
-public class Line extends DefaultShape implements Shape{
-    private Map<String,Double> properties=new HashMap<>();
+public class Line extends DefaultShape{
     private Point p2;
     public Line(Point p1,String shapeName,Point p2) {
         super(p1,shapeName);
         this.p2=p2;
-        this.properties.put("x1",(double)p1.x);
+        super.properties.put("x1",(double)p1.x);
         this.properties.put("y1",(double)p1.y);
         this.properties.put("x2",(double)p2.x);
         this.properties.put("y2",(double)p2.y);

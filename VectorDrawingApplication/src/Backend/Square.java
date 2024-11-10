@@ -1,22 +1,18 @@
 
 package Backend;
 
-import Interfaces.Shape;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.HashMap;
 import java.util.Map;
 
 
-public class Square extends DefaultShape implements Shape{
-    //private double radius;
-    private Map<String,Double> properties=new HashMap<>();
+public class Square extends DefaultShape {
 
     public Square(Point position,String shapeName,double length) {
         super(position,shapeName);
-        this.properties.put("x", (double)position.x);
-        this.properties.put("y",(double)position.y);
-        this.properties.put("length", length);
+        super.properties.put("x", (double)position.x);
+        super.properties.put("y",(double)position.y);
+        super.properties.put("length", length);
     }
     
     @Override
