@@ -1,6 +1,7 @@
 
 package Backend;
 
+import Interfaces.Shape;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 
 public class Circle extends DefaultShape implements Shape{
-    //private double radius;
+
     private Map<String,Double> properties=new HashMap<>();
 
     public Circle(Point position,String shapeName,double radius) {

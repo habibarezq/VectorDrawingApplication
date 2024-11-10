@@ -1,6 +1,7 @@
 
 package Backend;
 
+import Interfaces.Shape;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -45,10 +46,10 @@ public class Rectangle extends DefaultShape implements Shape{
     public void draw(Graphics canvas) {
         double width=this.properties.get("width");
         double height=this.properties.get("height");
-        //canvas.drawRect((this.getPosition().x)-(int)width,(this.getPosition().y)-(int)height,2*(int)width, 2*(int)height);
         canvas.setColor(this.getColor());
         canvas.drawRect((this.getPosition().x)-(int)width,(this.getPosition().y)-(int)height,2*(int)width, 2*(int)height);
         
+//        canvas.fillRect((this.getPosition().x)-(int)width,(this.getPosition().y)-(int)height,2*(int)width, 2*(int)height);
     }
     
 }

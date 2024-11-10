@@ -1,6 +1,7 @@
 
 package Backend;
 
+import Interfaces.Shape;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.HashMap;
