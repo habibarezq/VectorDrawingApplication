@@ -10,8 +10,8 @@ public class Square extends DefaultShape {
 
     public Square(Point position,String shapeName,double length) {
         super(position,shapeName);
-        super.properties.put("x", (double)position.x);
-        super.properties.put("y",(double)position.y);
+        super.properties.put("x2", (double)position.x);
+        super.properties.put("y2",(double)position.y);
         super.properties.put("length", length);
     }
     
@@ -19,10 +19,10 @@ public class Square extends DefaultShape {
     public void setProperties(Map<String, Double> properties) {
     if(properties.containsKey("length"))
         this.properties.put("length",properties.get("length"));
-    if(properties.containsKey("x"))
-        this.properties.put("x",properties.get("x"));
-    if(properties.containsKey("y"))
-        this.properties.put("y",properties.get("y"));
+    if(properties.containsKey("x2"))
+        this.properties.put("x2",properties.get("x2"));
+    if(properties.containsKey("y2"))
+        this.properties.put("y2",properties.get("y2"));
     
     }
     
@@ -35,8 +35,12 @@ public class Square extends DefaultShape {
     @Override
     public void draw(Graphics canvas) {
         double length=this.properties.get("length");
+        double x,y;
+        x=this.properties.get("x2");
+        y=this.properties.get("y2");
+        
         canvas.setColor(this.getColor());
-        canvas.drawRect((this.getPosition().x)-(int)length,(this.getPosition().y)-(int)length,2*(int)length, 2*(int)length);
+        canvas.drawRect((int)x-(int)length,(int)y-(int)length,2*(int)length, 2*(int)length);
         
     }
     
