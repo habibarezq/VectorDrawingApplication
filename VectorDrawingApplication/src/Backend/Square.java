@@ -1,4 +1,3 @@
-
 package Backend;
 
 import java.awt.Color;
@@ -6,29 +5,30 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Map;
 
-
 public class Square extends DefaultShape {
 
-    public Square(Point position,String shapeName,double length) {
-        super(position,shapeName);
+    public Square(Point position, String shapeName, double length) {
+        super(position, shapeName);
         super.setColor(Color.BLACK);
-        super.setFillColor(Color.WHITE);
-        super.properties.put("x2", (double)position.x);
-        super.properties.put("y2",(double)position.y);
+        //super.setFillColor(Color.WHITE);
+        super.properties.put("x2", (double) position.x);
+        super.properties.put("y2", (double) position.y);
         super.properties.put("length", length);
     }
-    
+
     @Override
     public void setProperties(Map<String, Double> properties) {
-    if(properties.containsKey("length"))
-        this.properties.put("length",properties.get("length"));
-    if(properties.containsKey("x2"))
-        this.properties.put("x2",properties.get("x2"));
-    if(properties.containsKey("y2"))
-        this.properties.put("y2",properties.get("y2"));
-    
+        if (properties.containsKey("length")) {
+            this.properties.put("length", properties.get("length"));
+        }
+        if (properties.containsKey("x2")) {
+            this.properties.put("x2", properties.get("x2"));
+        }
+        if (properties.containsKey("y2")) {
+            this.properties.put("y2", properties.get("y2"));
+        }
+
     }
-    
 
     @Override
     public Map<String, Double> getProperties() {
@@ -37,17 +37,17 @@ public class Square extends DefaultShape {
 
     @Override
     public void draw(Graphics canvas) {
-        double length=this.properties.get("length");
-        double x,y;
-        x=this.properties.get("x2");
-        y=this.properties.get("y2");
-        
-        
-        canvas.setColor(this.getColor());
-        canvas.drawRect((int)x-(int)length,(int)y-(int)length,2*(int)length, 2*(int)length);
+        double length = this.properties.get("length");
+        double x, y;
+        x = this.properties.get("x2");
+        y = this.properties.get("y2");
+
         canvas.setColor(this.getFillColor());
-        canvas.fillRect((int)x-(int)length,(int)y-(int)length,2*(int)length, 2*(int)length);
-    
+        canvas.fillRect((int) x - (int) length, (int) y - (int) length, 2 * (int) length, 2 * (int) length);
+
+        canvas.setColor(this.getColor());
+        canvas.drawRect((int) x - (int) length, (int) y - (int) length, 2 * (int) length, 2 * (int) length);
+
     }
-    
+
 }

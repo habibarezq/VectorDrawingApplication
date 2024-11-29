@@ -3,10 +3,12 @@ package Backend;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Map;
 
-public class Line extends DefaultShape{
+public class Line extends DefaultShape {
     private Point p2;
+
     public Line(Point p1,String shapeName,Point p2) {
         super(p1,shapeName);
         this.p2=p2;

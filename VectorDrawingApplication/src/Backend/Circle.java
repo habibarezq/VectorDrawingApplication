@@ -42,10 +42,11 @@ public class Circle extends DefaultShape {
         x=this.properties.get("x2");
         y=this.properties.get("y2");
         
-        canvas.setColor(this.getColor());
-        canvas.drawOval((int)(x)-(int)radius,(int)(y)-(int)radius,2*(int)radius, 2*(int)radius);
         canvas.setColor(this.getFillColor());
         canvas.fillOval((int)(x)-(int)radius,(int)(y)-(int)radius,2*(int)radius, 2*(int)radius);
+        
+        canvas.setColor(this.getColor());
+        canvas.drawOval((int)(x)-(int)radius,(int)(y)-(int)radius,2*(int)radius, 2*(int)radius);
         
     }
     

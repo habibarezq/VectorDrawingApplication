@@ -46,10 +46,12 @@ public class Rectangle extends DefaultShape {
         x=this.properties.get("x2");
         y=this.properties.get("y2");
         
-        canvas.setColor(this.getColor());
-        canvas.drawRect((int)x-(int)width,(int)y-(int)length,2*(int)width, 2*(int)length);
         canvas.setColor(this.getFillColor());
         canvas.fillRect((int)x-(int)width,(int)y-(int)length,2*(int)width, 2*(int)length);
+        
+        canvas.setColor(this.getColor());
+        canvas.drawRect((int)x-(int)width,(int)y-(int)length,2*(int)width, 2*(int)length);
+       
     }
     
 }

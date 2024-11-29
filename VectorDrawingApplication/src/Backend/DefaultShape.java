@@ -3,16 +3,21 @@ package Backend;
 import Interfaces.Shape;
 import java.awt.Color;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class DefaultShape implements Shape {
+public abstract class DefaultShape implements Shape , Serializable {
     protected Map<String,Double> properties=new HashMap<>();
     private Point position;
     private Color color;
     private Color fillColor;
     private String shapeName;
-
+    
+    public DefaultShape()
+    {
+        
+    }
     public DefaultShape(Point position, String shapeName) {
         //Default Shape implements all getters and setters for Shape interface
         this.position = position;
