@@ -18,7 +18,7 @@ public class CircleDialogBox extends javax.swing.JDialog {
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,9 +185,9 @@ public class CircleDialogBox extends javax.swing.JDialog {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        String r=radiusField.getText();
-        String string_x=pos_x.getText();
-        String string_y=pos_y.getText();
+        String r = radiusField.getText();
+        String string_x = pos_x.getText();
+        String string_y = pos_y.getText();
         if (r.isEmpty() || string_x.isEmpty() || string_y.isEmpty())
             JOptionPane.showMessageDialog(null, "Some fields are Empty!", "Message", JOptionPane.INFORMATION_MESSAGE);
         else {
@@ -195,25 +195,23 @@ public class CircleDialogBox extends javax.swing.JDialog {
             int x = Integer.parseInt(string_x);
             int y = Integer.parseInt(string_y);
             Point p = new Point(x, y);
-            if(ValidateFields.validateCoordinates(x,y,radius))
-            {
-            main.shapesManager.countC++; //Increase Count of Circles drawn
-            String shapeName="Circle0"+ main.shapesManager.countC;
-            Circle circle = new Circle(p, shapeName, radius);
+            if (ValidateFields.validateCoordinates(x, y, radius)) {
+                main.shapesManager.setCountC(main.shapesManager.getCountC() + 1);
+                //Increase Count of Circles drawn
+                String shapeName = "Circle0" + main.shapesManager.getCountC();
+                Circle circle = new Circle(p, shapeName, radius);
 
-            main.shapesManager.addShape(circle);
-            circle.draw(main.g);
-            
-            //Add Item To Combo Box
-            main.shapesComboBox.addItem(shapeName);
-            
-            //Dispose the properties window
-            setVisible(false);
-            dispose();
-            }
-            else
-            {
-            JOptionPane.showMessageDialog(null, "Coordinates are out of Bound!", "Message", JOptionPane.INFORMATION_MESSAGE);  
+                main.shapesManager.addShape(circle);
+                circle.draw(main.g);
+
+                //Add Item To Combo Box
+                main.shapesComboBox.addItem(shapeName);
+
+                //Dispose the properties window
+                setVisible(false);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Coordinates are out of Bound!", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_saveButtonActionPerformed

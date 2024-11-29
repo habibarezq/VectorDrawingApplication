@@ -199,8 +199,8 @@ public class LineDialogBox extends javax.swing.JDialog {
             Point p2=new Point(x2,y2);
             if(ValidateFields.validateCoordinates(x1,y1) && ValidateFields.validateCoordinates(x2, y2))
             {
-                main.shapesManager.countL++; //Increase Count of Lines Drawn
-                String shapeName="Line0"+main.shapesManager.countL;
+                main.shapesManager.setCountL(main.shapesManager.getCountL() + 1); //Increase Count of Lines Drawn
+                String shapeName="Line0"+main.shapesManager.getCountL();
                 
                 Line l = new Line(p1,shapeName,p2);
                 main.shapesManager.addShape(l);

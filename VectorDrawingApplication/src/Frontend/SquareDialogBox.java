@@ -185,8 +185,8 @@ public class SquareDialogBox extends javax.swing.JDialog {
             Point p = new Point(x, y);
             if(ValidateFields.validateCoordinates(x,y,length))
             {
-                main.shapesManager.countS++;
-                String shapeName="Square0"+main.shapesManager.countS;
+                main.shapesManager.setCountS(main.shapesManager.getCountS() + 1);
+                String shapeName="Square0"+main.shapesManager.getCountS();
                 
                 Square s=new Square(p,shapeName,length);
                 main.shapesManager.addShape(s);

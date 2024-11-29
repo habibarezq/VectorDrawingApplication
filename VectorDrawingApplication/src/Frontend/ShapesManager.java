@@ -12,10 +12,42 @@ import javax.swing.JPanel;
 public class ShapesManager extends JPanel implements DrawingEngine {
 
     protected HashMap<String, Shape> shapes;
-    protected int countC = 0, countL = 0, countR = 0, countS = 0;
+    private int countC = 0, countL = 0, countR = 0, countS = 0;
 
     public ShapesManager() {
         this.shapes = new HashMap<>();
+    }
+
+    public int getCountC() {
+        return countC;
+    }
+
+    public void setCountC(int countC) {
+        this.countC = countC;
+    }
+
+    public int getCountL() {
+        return countL;
+    }
+
+    public void setCountL(int countL) {
+        this.countL = countL;
+    }
+
+    public int getCountR() {
+        return countR;
+    }
+
+    public void setCountR(int countR) {
+        this.countR = countR;
+    }
+
+    public int getCountS() {
+        return countS;
+    }
+
+    public void setCountS(int countS) {
+        this.countS = countS;
     }
 
     @Override
@@ -26,6 +58,14 @@ public class ShapesManager extends JPanel implements DrawingEngine {
     @Override
     public void removeShape(Shape shape) {
         shapes.remove(shape.getName());
+//        if(shape instanceof Line)
+//            this.countL--;
+//        else if(shape instanceof Square)
+//            this.countS--;
+//        else if(shape instanceof Rectangle)
+//            this.countR--;
+//        else if(shape instanceof Circle)
+//            this.countC--;
     }
 
     @Override
@@ -57,5 +97,13 @@ public class ShapesManager extends JPanel implements DrawingEngine {
         Shape toResize =shapes.get(shape.getName());
         toResize.setProperties(properties);
         
+    }
+    
+    public void resetCount()
+    {
+        this.countC=0;
+        this.countL=0;
+        this.countR=0;
+        this.countS=0;
     }
 }

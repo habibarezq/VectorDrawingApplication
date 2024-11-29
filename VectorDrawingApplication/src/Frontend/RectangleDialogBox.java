@@ -212,8 +212,8 @@ public class RectangleDialogBox extends javax.swing.JDialog {
             Point p = new Point(x, y);
             if(ValidateFields.validateCoordinates(x,y,w,h))
             {
-                main.shapesManager.countR++;
-                String shapeName="Rectangle0"+main.shapesManager.countR;
+                main.shapesManager.setCountR(main.shapesManager.getCountR() + 1);
+                String shapeName="Rectangle0"+main.shapesManager.getCountR();
                 
                 Rectangle r = new Rectangle(p,shapeName, w,h);
                 main.shapesManager.addShape(r);
