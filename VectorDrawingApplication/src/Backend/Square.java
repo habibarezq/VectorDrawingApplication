@@ -1,6 +1,7 @@
 
 package Backend;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Map;
@@ -10,6 +11,8 @@ public class Square extends DefaultShape {
 
     public Square(Point position,String shapeName,double length) {
         super(position,shapeName);
+        super.setColor(Color.BLACK);
+        super.setFillColor(Color.WHITE);
         super.properties.put("x2", (double)position.x);
         super.properties.put("y2",(double)position.y);
         super.properties.put("length", length);
@@ -39,9 +42,12 @@ public class Square extends DefaultShape {
         x=this.properties.get("x2");
         y=this.properties.get("y2");
         
+        
         canvas.setColor(this.getColor());
         canvas.drawRect((int)x-(int)length,(int)y-(int)length,2*(int)length, 2*(int)length);
-        
+        canvas.setColor(this.getFillColor());
+        canvas.fillRect((int)x-(int)length,(int)y-(int)length,2*(int)length, 2*(int)length);
+    
     }
     
 }
