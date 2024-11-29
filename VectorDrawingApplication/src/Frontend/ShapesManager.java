@@ -45,14 +45,17 @@ public class ShapesManager extends JPanel implements DrawingEngine {
     
     public void moveShape(Shape shape,Map<String, Double> properties)
     {
+        
         Shape toMove =shapes.get(shape.getName());
-//        int index=shape.getName().indexOf('0');
-//        String shapeName=shape.getName().substring(0,index);
-//        if(shapeName=="Line")
-//        {
-//            
-//        }
         toMove.setProperties(properties);
-        System.out.println("New Coordinates: x2 "+toMove.getProperties().get("x2"));
+        
+    }
+    
+    public void resizeShape(Shape shape,Map<String, Double> properties)
+    {
+        
+        Shape toResize =shapes.get(shape.getName());
+        toResize.setProperties(properties);
+        
     }
 }

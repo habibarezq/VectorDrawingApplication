@@ -1,5 +1,9 @@
 package Frontend;
 
+import Backend.Circle;
+import Backend.Line;
+import Backend.Rectangle;
+import Backend.Square;
 import Interfaces.Shape;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -7,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.MediaTracker;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
 
 public class Program extends javax.swing.JFrame {
 
@@ -54,8 +59,13 @@ public class Program extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         colorize = new javax.swing.JButton();
         remove = new javax.swing.JButton();
+        resizeButton = new javax.swing.JButton();
+        moveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setFocusTraversalPolicyProvider(true);
+        jPanel1.setPreferredSize(new java.awt.Dimension(850, 450));
 
         canvas.setBackground(new java.awt.Color(255, 255, 255));
         canvas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204)));
@@ -65,7 +75,7 @@ public class Program extends javax.swing.JFrame {
         canvas.setLayout(canvasLayout);
         canvasLayout.setHorizontalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         canvasLayout.setVerticalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,6 +119,7 @@ public class Program extends javax.swing.JFrame {
         });
 
         shapesBox.setFont(new java.awt.Font("Georgia Pro", 0, 12)); // NOI18N
+        shapesBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Shape" }));
         shapesBox.setPreferredSize(new java.awt.Dimension(150, 30));
         shapesBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,54 +148,85 @@ public class Program extends javax.swing.JFrame {
             }
         });
 
+        resizeButton.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        resizeButton.setText("Resize");
+        resizeButton.setPreferredSize(new java.awt.Dimension(70, 21));
+        resizeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resizeButtonActionPerformed(evt);
+            }
+        });
+
+        moveButton.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        moveButton.setText("Move");
+        moveButton.setPreferredSize(new java.awt.Dimension(70, 21));
+        moveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moveButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(colorize)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(remove))
-                    .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(resizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(colorize)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(remove)))
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                    .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(circleButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
+                        .addGap(102, 102, 102)
                         .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                         .addComponent(squareButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGap(86, 86, 86)
                         .addComponent(rectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(circleButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rectButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(squareButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rectButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(squareButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(canvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(191, 191, 191)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(colorize)
-                            .addComponent(remove))))
+                            .addComponent(remove))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(resizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -192,13 +234,11 @@ public class Program extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -226,18 +266,21 @@ public class Program extends javax.swing.JFrame {
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
         String selectedShapeString = (String) shapesBox.getSelectedItem();
-        if (selectedShapeString != null) {
+        if (selectedShapeString != null && selectedShapeString != "Choose Shape") {
             this.shapesComboBox.removeItem(selectedShapeString);
             Shape shapeToRemove = shapesManager.shapes.get(selectedShapeString);
             shapesManager.removeShape(shapeToRemove);
             shapesManager.refresh(g);
+        } else if (selectedShapeString == "Choose Shape") {
+            JOptionPane.showMessageDialog(null, "No Shape Selected!", "Message", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_removeActionPerformed
 
     private void colorizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorizeActionPerformed
         Color currentColor = Color.BLACK;
         String selectedShapeString = (String) this.shapesComboBox.getSelectedItem();
-        if (selectedShapeString != null) {
+        if (selectedShapeString != "Choose Shape" && selectedShapeString != null) {
             Shape shapeToColor = shapesManager.shapes.get(selectedShapeString);
             Color newColor;
             newColor = JColorChooser.showDialog(Program.this, "Select Shape Color", currentColor);
@@ -248,8 +291,47 @@ public class Program extends javax.swing.JFrame {
 
                 shapesManager.refresh(g);
             }
+        } else if (selectedShapeString == "Choose Shape") {
+            JOptionPane.showMessageDialog(null, "No Shape Selected!", "Message", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_colorizeActionPerformed
+
+    private void resizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resizeButtonActionPerformed
+        String selectedShapeString = (String) shapesBox.getSelectedItem();
+        if (selectedShapeString != null && selectedShapeString.compareTo("Choose Shape") != 0) {
+            Shape shapeToResize = shapesManager.shapes.get(selectedShapeString);
+            int index = shapeToResize.getName().indexOf('0');
+            String shapeName = shapeToResize.getName().substring(0, index);
+
+            if (shapeToResize instanceof Line) {
+                LineResizeDialogBox window = new LineResizeDialogBox(this, rootPaneCheckingEnabled, shapeToResize);
+            } else if (shapeToResize instanceof Circle) {
+                CircleResizeDialogBox window = new CircleResizeDialogBox(this, rootPaneCheckingEnabled, shapeToResize);
+            } else if (shapeToResize instanceof Square) {
+                SquareResizeDialogBox window = new SquareResizeDialogBox(this, rootPaneCheckingEnabled, shapeToResize);
+            } else if (shapeToResize instanceof Rectangle) {
+                RectangleResizeDialogBox window = new RectangleResizeDialogBox(this, rootPaneCheckingEnabled, shapeToResize);
+            }
+            shapesManager.refresh(g);
+        } else if (selectedShapeString.compareTo("Choose Shape") == 0) {
+            JOptionPane.showMessageDialog(null, "No Shape Selected!", "Message", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }//GEN-LAST:event_resizeButtonActionPerformed
+
+    private void moveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveButtonActionPerformed
+
+        String selectedShapeString = (String) shapesBox.getSelectedItem();
+        if (selectedShapeString != null && selectedShapeString.compareTo("Choose Shape") != 0) {
+            Shape shapeToMove = shapesManager.shapes.get(selectedShapeString);
+            MoveShapeDialogBox window = new MoveShapeDialogBox(this, rootPaneCheckingEnabled, shapeToMove);
+            shapesManager.refresh(g);
+        } else if (selectedShapeString.compareTo("Choose Shape") == 0) {
+            JOptionPane.showMessageDialog(null, "No Shape Selected!", "Message", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }//GEN-LAST:event_moveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,8 +375,10 @@ public class Program extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton lineButton;
+    private javax.swing.JButton moveButton;
     private javax.swing.JButton rectButton;
     private javax.swing.JButton remove;
+    private javax.swing.JButton resizeButton;
     private javax.swing.JComboBox<String> shapesBox;
     private javax.swing.JButton squareButton;
     // End of variables declaration//GEN-END:variables

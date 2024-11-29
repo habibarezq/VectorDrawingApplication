@@ -1,28 +1,29 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ */
 package Frontend;
 
-import Backend.Line;
 import Interfaces.Shape;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
-
-public class MoveShapeDialogBox extends javax.swing.JDialog {
-
+/**
+ *
+ * @author habib
+ */
+public class LineResizeDialogBox extends javax.swing.JDialog {
     Program main;
-    Shape shapeToMove;
-
-    public MoveShapeDialogBox(java.awt.Frame parent, boolean modal, Shape shape) {
+    Shape shapeToResize;
+    public LineResizeDialogBox(java.awt.Frame parent, boolean modal,Shape shape) {
         super(parent, modal);
         this.main = (Program) parent;
-        this.shapeToMove = shape;
+        this.shapeToResize = shape;
         initComponents();
-        int index = shape.getName().indexOf('0');
-        String shapeName = shape.getName().substring(0, index);
-        System.out.println("Shape Name" + shapeName);
-        setTitle("Move " + shapeName);
+
+        setTitle("Resize Line");
         setResizable(false);
         setContentPane(jPanel1);
         setVisible(true);
@@ -51,7 +52,7 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 200));
 
         jLabel3.setFont(new java.awt.Font("Georgia Pro", 0, 14)); // NOI18N
-        jLabel3.setText("Enter New X:");
+        jLabel3.setText("Enter New X2:");
 
         pos_x.setPreferredSize(new java.awt.Dimension(90, 25));
         pos_x.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +80,7 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
         });
 
         jLabel4.setFont(new java.awt.Font("Georgia Pro", 0, 14)); // NOI18N
-        jLabel4.setText("Enter New Y:");
+        jLabel4.setText("Enter New Y2:");
 
         pos_y.setPreferredSize(new java.awt.Dimension(90, 25));
         pos_y.addActionListener(new java.awt.event.ActionListener() {
@@ -160,37 +161,16 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
 
             Point p = new Point(x, y);
 
-            Map<String, Double> properties = new HashMap<>();
+            Map<String, Double> properties = this.shapeToResize.getProperties();
 
-            if (ValidateFields.validateCoordinates(x, y)) {
+            properties.put("x2", (double) p.x);
+            properties.put("y2", (double) p.y);
 
-                System.out.println("Shape Name :" + this.shapeToMove.getName());
-                if (this.shapeToMove instanceof Line) {
-                    properties=this.shapeToMove.getProperties();
-                    
-                    double x_diff=(double)x-properties.get("x1");
-                    double y_diff=(double)y-properties.get("y1");
-                    
-                    
-                    properties.put("x1", (double) p.x);
-                    properties.put("y1", (double) p.y);
-                    properties.put("x2", properties.get("x2")+x_diff);
-                    properties.put("y2", properties.get("y2")+y_diff);
-                    System.out.println("Prop :"+this.shapeToMove.getProperties());
-                    
-                    
-                } else {
-                    properties.put("x2", (double) p.x);
-                    properties.put("y2", (double) p.y);
-                    
-                }
-                main.shapesManager.moveShape(this.shapeToMove, properties);
-                //Dispose the properties Window
-                setVisible(false);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Coordinates are out of Bound!", "Message", JOptionPane.INFORMATION_MESSAGE);
-            }
+            main.shapesManager.resizeShape(this.shapeToResize, properties);
+
+            //Dispose the properties Window
+            setVisible(false);
+            dispose();
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -221,27 +201,19 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LineResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
             }
         });
     }

@@ -9,20 +9,18 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 
-public class MoveShapeDialogBox extends javax.swing.JDialog {
+public class RectangleResizeDialogBox extends javax.swing.JDialog {
 
     Program main;
-    Shape shapeToMove;
-
-    public MoveShapeDialogBox(java.awt.Frame parent, boolean modal, Shape shape) {
+    Shape shapeToResize;
+    
+    public RectangleResizeDialogBox(java.awt.Frame parent, boolean modal,Shape shape) {
         super(parent, modal);
         this.main = (Program) parent;
-        this.shapeToMove = shape;
+        this.shapeToResize = shape;
         initComponents();
-        int index = shape.getName().indexOf('0');
-        String shapeName = shape.getName().substring(0, index);
-        System.out.println("Shape Name" + shapeName);
-        setTitle("Move " + shapeName);
+        
+        setTitle("Resize Rectangle");
         setResizable(false);
         setContentPane(jPanel1);
         setVisible(true);
@@ -40,23 +38,23 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        pos_x = new javax.swing.JTextField();
+        length = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        pos_y = new javax.swing.JTextField();
+        width = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 200));
 
         jLabel3.setFont(new java.awt.Font("Georgia Pro", 0, 14)); // NOI18N
-        jLabel3.setText("Enter New X:");
+        jLabel3.setText("Enter New Length:");
 
-        pos_x.setPreferredSize(new java.awt.Dimension(90, 25));
-        pos_x.addActionListener(new java.awt.event.ActionListener() {
+        length.setPreferredSize(new java.awt.Dimension(90, 25));
+        length.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pos_xActionPerformed(evt);
+                lengthActionPerformed(evt);
             }
         });
 
@@ -79,12 +77,12 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
         });
 
         jLabel4.setFont(new java.awt.Font("Georgia Pro", 0, 14)); // NOI18N
-        jLabel4.setText("Enter New Y:");
+        jLabel4.setText("Enter New Width:");
 
-        pos_y.setPreferredSize(new java.awt.Dimension(90, 25));
-        pos_y.addActionListener(new java.awt.event.ActionListener() {
+        width.setPreferredSize(new java.awt.Dimension(90, 25));
+        width.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pos_yActionPerformed(evt);
+                widthActionPerformed(evt);
             }
         });
 
@@ -92,23 +90,19 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pos_x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(width, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(length, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,10 +110,10 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
                 .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pos_x, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(length, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(width, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -142,56 +136,34 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pos_xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_xActionPerformed
+    private void lengthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lengthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pos_xActionPerformed
+    }//GEN-LAST:event_lengthActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
 
-        String string_x = pos_x.getText();
-        String string_y = pos_y.getText();
+        String string_l = length.getText();
+        String string_w = width.getText();
 
-        if (string_x.isEmpty() || string_y.isEmpty())
+        if (string_l.isEmpty() || string_w.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Some fields are Empty!", "Message", JOptionPane.INFORMATION_MESSAGE);
-        else {
+        } else {
 
-            int x = Integer.parseInt(string_x);
-            int y = Integer.parseInt(string_y);
+            int l = Integer.parseInt(string_l);
+            int w = Integer.parseInt(string_w);
 
-            Point p = new Point(x, y);
+            Map<String, Double> properties = this.shapeToResize.getProperties();
 
-            Map<String, Double> properties = new HashMap<>();
+            properties.put("length", (double) l);
+            properties.put("width", (double) w);
+            
+            main.shapesManager.resizeShape(this.shapeToResize, properties);
 
-            if (ValidateFields.validateCoordinates(x, y)) {
-
-                System.out.println("Shape Name :" + this.shapeToMove.getName());
-                if (this.shapeToMove instanceof Line) {
-                    properties=this.shapeToMove.getProperties();
-                    
-                    double x_diff=(double)x-properties.get("x1");
-                    double y_diff=(double)y-properties.get("y1");
-                    
-                    
-                    properties.put("x1", (double) p.x);
-                    properties.put("y1", (double) p.y);
-                    properties.put("x2", properties.get("x2")+x_diff);
-                    properties.put("y2", properties.get("y2")+y_diff);
-                    System.out.println("Prop :"+this.shapeToMove.getProperties());
-                    
-                    
-                } else {
-                    properties.put("x2", (double) p.x);
-                    properties.put("y2", (double) p.y);
-                    
-                }
-                main.shapesManager.moveShape(this.shapeToMove, properties);
-                //Dispose the properties Window
-                setVisible(false);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Coordinates are out of Bound!", "Message", JOptionPane.INFORMATION_MESSAGE);
-            }
+            //Dispose the properties Window
+            setVisible(false);
+            dispose();
         }
+    
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -200,59 +172,53 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void pos_yActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_yActionPerformed
+    private void widthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_widthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pos_yActionPerformed
+    }//GEN-LAST:event_widthActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MoveShapeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(RectangleResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(RectangleResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(RectangleResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(RectangleResizeDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the dialog */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+           
+           
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField pos_x;
-    private javax.swing.JTextField pos_y;
+    private javax.swing.JTextField length;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextField width;
     // End of variables declaration//GEN-END:variables
 }
