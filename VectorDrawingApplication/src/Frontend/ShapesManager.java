@@ -49,7 +49,13 @@ public class ShapesManager extends JPanel implements DrawingEngine {
     public void setCountS(int countS) {
         this.countS = countS;
     }
-
+    public void resetCount()
+    {
+        this.countC=0;
+        this.countL=0;
+        this.countR=0;
+        this.countS=0;
+    }
     @Override
     public void addShape(Shape shape) {
         shapes.put(shape.getName(), shape);
@@ -82,7 +88,7 @@ public class ShapesManager extends JPanel implements DrawingEngine {
             s.draw(canvas);
         }
     }
-    
+    @Override
     public void moveShape(Shape shape,Map<String, Double> properties)
     {
         
@@ -90,7 +96,7 @@ public class ShapesManager extends JPanel implements DrawingEngine {
         toMove.setProperties(properties);
         
     }
-    
+    @Override
     public void resizeShape(Shape shape,Map<String, Double> properties)
     {
         
@@ -99,11 +105,5 @@ public class ShapesManager extends JPanel implements DrawingEngine {
         
     }
     
-    public void resetCount()
-    {
-        this.countC=0;
-        this.countL=0;
-        this.countR=0;
-        this.countS=0;
-    }
+
 }
