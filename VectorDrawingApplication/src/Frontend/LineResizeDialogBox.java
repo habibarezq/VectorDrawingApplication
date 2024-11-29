@@ -6,7 +6,6 @@ package Frontend;
 
 import Interfaces.Shape;
 import java.awt.Point;
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 

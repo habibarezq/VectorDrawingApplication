@@ -9,9 +9,21 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.MediaTracker;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Program extends javax.swing.JFrame {
 
@@ -61,6 +73,8 @@ public class Program extends javax.swing.JFrame {
         remove = new javax.swing.JButton();
         resizeButton = new javax.swing.JButton();
         moveButton = new javax.swing.JButton();
+        save = new javax.swing.JButton();
+        load = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +83,7 @@ public class Program extends javax.swing.JFrame {
 
         canvas.setBackground(new java.awt.Color(255, 255, 255));
         canvas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204)));
-        canvas.setPreferredSize(new java.awt.Dimension(450, 350));
+        canvas.setPreferredSize(new java.awt.Dimension(650, 380));
 
         javax.swing.GroupLayout canvasLayout = new javax.swing.GroupLayout(canvas);
         canvas.setLayout(canvasLayout);
@@ -79,7 +93,7 @@ public class Program extends javax.swing.JFrame {
         );
         canvasLayout.setVerticalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
+            .addGap(0, 378, Short.MAX_VALUE)
         );
 
         circleButton.setFont(new java.awt.Font("Georgia Pro", 1, 12)); // NOI18N
@@ -134,6 +148,7 @@ public class Program extends javax.swing.JFrame {
 
         colorize.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         colorize.setText("Colorize");
+        colorize.setPreferredSize(new java.awt.Dimension(73, 35));
         colorize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colorizeActionPerformed(evt);
@@ -142,6 +157,7 @@ public class Program extends javax.swing.JFrame {
 
         remove.setFont(new java.awt.Font("Georgia Pro", 0, 12)); // NOI18N
         remove.setText("Remove");
+        remove.setPreferredSize(new java.awt.Dimension(73, 35));
         remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeActionPerformed(evt);
@@ -150,7 +166,7 @@ public class Program extends javax.swing.JFrame {
 
         resizeButton.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         resizeButton.setText("Resize");
-        resizeButton.setPreferredSize(new java.awt.Dimension(70, 21));
+        resizeButton.setPreferredSize(new java.awt.Dimension(73, 21));
         resizeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resizeButtonActionPerformed(evt);
@@ -159,10 +175,29 @@ public class Program extends javax.swing.JFrame {
 
         moveButton.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         moveButton.setText("Move");
+        moveButton.setOpaque(true);
         moveButton.setPreferredSize(new java.awt.Dimension(70, 21));
         moveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moveButtonActionPerformed(evt);
+            }
+        });
+
+        save.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        save.setText("Save");
+        save.setPreferredSize(new java.awt.Dimension(73, 35));
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+
+        load.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        load.setText("Load");
+        load.setPreferredSize(new java.awt.Dimension(73, 35));
+        load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadActionPerformed(evt);
             }
         });
 
@@ -171,24 +206,24 @@ public class Program extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(resizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(colorize)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(remove)))
-                        .addGap(13, 13, 13))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(load, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(resizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(colorize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(remove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -212,33 +247,39 @@ public class Program extends javax.swing.JFrame {
                     .addComponent(squareButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(canvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(load, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(121, 121, 121)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(shapesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(colorize)
-                            .addComponent(remove))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(colorize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(remove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(resizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(resizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(moveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(canvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, 61))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,12 +307,12 @@ public class Program extends javax.swing.JFrame {
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
         String selectedShapeString = (String) shapesBox.getSelectedItem();
-        if (selectedShapeString != null && selectedShapeString != "Choose Shape") {
+        if (selectedShapeString != null && selectedShapeString.compareTo("Choose Shape") != 0) {
             this.shapesComboBox.removeItem(selectedShapeString);
             Shape shapeToRemove = shapesManager.shapes.get(selectedShapeString);
             shapesManager.removeShape(shapeToRemove);
             shapesManager.refresh(g);
-        } else if (selectedShapeString == "Choose Shape") {
+        } else if (selectedShapeString.compareTo("Choose Shape") == 0) {
             JOptionPane.showMessageDialog(null, "No Shape Selected!", "Message", JOptionPane.INFORMATION_MESSAGE);
 
         }
@@ -280,7 +321,7 @@ public class Program extends javax.swing.JFrame {
     private void colorizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorizeActionPerformed
         Color currentColor = Color.BLACK;
         String selectedShapeString = (String) this.shapesComboBox.getSelectedItem();
-        if (selectedShapeString != "Choose Shape" && selectedShapeString != null) {
+        if (selectedShapeString.compareTo("Choose Shape") != 0 && selectedShapeString != null) {
             Shape shapeToColor = shapesManager.shapes.get(selectedShapeString);
             Color newColor;
             newColor = JColorChooser.showDialog(Program.this, "Select Shape Color", currentColor);
@@ -291,7 +332,7 @@ public class Program extends javax.swing.JFrame {
 
                 shapesManager.refresh(g);
             }
-        } else if (selectedShapeString == "Choose Shape") {
+        } else if (selectedShapeString.compareTo("Choose Shape") == 0) {
             JOptionPane.showMessageDialog(null, "No Shape Selected!", "Message", JOptionPane.INFORMATION_MESSAGE);
 
         }
@@ -332,6 +373,124 @@ public class Program extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_moveButtonActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(".")); //To set current directory tp where my project is located 
+        int response = fileChooser.showSaveDialog(null); //Select file to Save
+
+        if (response == JFileChooser.APPROVE_OPTION) {
+            FileOutputStream fileOut = null;
+            try {
+                String fileName = fileChooser.getSelectedFile().getName() + ".ser";
+                File f = new File(fileName);
+                try {
+                    if (f.createNewFile()) //File doesn't Exist and Created Successfully
+                    {
+                        System.out.println("File Created Successfully !" + f);
+                    } else {
+                        System.out.println("File Already Exists!");
+                    }
+                } catch (IOException ex) {
+                    System.out.println("Exception : " + ex);
+                }
+
+                //We have the file we want to save the Objects' info to
+                //Serialization
+                fileOut = new FileOutputStream(fileName); //The .ser file which i will save all my objects info to
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+                //HERE WE SHOULD WRITE ALL SHAPES OBJECTS
+                Shape[] shapesList = this.shapesManager.getShapes();
+               for(Shape s:shapesList)
+               {
+                   System.out.println("Name "+s.getName());
+                out.writeObject(s);   
+               }
+
+                out.close();
+                fileOut.close();
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    fileOut.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(".")); //To set current directory tp where my project is located 
+        int response = fileChooser.showOpenDialog(null); //Select file to Save
+
+        if (response == JFileChooser.APPROVE_OPTION) {
+
+            FileInputStream fileIn = null;
+            try {
+                String fileName = fileChooser.getSelectedFile().getName();
+                System.out.println("File Name" + fileName);
+                File f = new File(fileName);
+
+                Shape myObj = null;
+                fileIn = new FileInputStream(fileName);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                
+                this.shapesManager.shapes.clear();
+                this.shapesComboBox.removeAllItems();
+                this.shapesComboBox.addItem("Choose Shape");
+                
+                try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+
+                        myObj = (Shape) in.readObject();
+
+                        if (myObj instanceof Line) {
+                            System.out.println("Line");
+                        } else if (myObj instanceof Square) {
+                            System.out.println("Square");
+                        } else if (myObj instanceof Rectangle) {
+                            System.out.println("Rectangle");
+                        }
+                        else if(myObj instanceof Circle){
+                            System.out.println("Circle");
+                        }
+                        
+                        this.shapesManager.shapes.put(myObj.getName(), myObj);
+                        this.shapesComboBox.addItem(myObj.getName());
+
+                    }
+                } catch (Exception e) {
+                    System.out.println("come inside loop to check logs.label update faild");
+                }
+
+                
+
+                this.shapesManager.refresh(g);
+
+                in.close();
+                fileIn.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    fileIn.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+    }//GEN-LAST:event_loadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -375,10 +534,12 @@ public class Program extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton lineButton;
+    private javax.swing.JButton load;
     private javax.swing.JButton moveButton;
     private javax.swing.JButton rectButton;
     private javax.swing.JButton remove;
     private javax.swing.JButton resizeButton;
+    private javax.swing.JButton save;
     private javax.swing.JComboBox<String> shapesBox;
     private javax.swing.JButton squareButton;
     // End of variables declaration//GEN-END:variables

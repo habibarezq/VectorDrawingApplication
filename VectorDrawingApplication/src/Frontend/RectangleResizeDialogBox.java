@@ -1,10 +1,7 @@
 
 package Frontend;
 
-import Backend.Line;
 import Interfaces.Shape;
-import java.awt.Point;
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
@@ -38,23 +35,23 @@ public class RectangleResizeDialogBox extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        length = new javax.swing.JTextField();
+        width = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        width = new javax.swing.JTextField();
+        length = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 200));
 
         jLabel3.setFont(new java.awt.Font("Georgia Pro", 0, 14)); // NOI18N
-        jLabel3.setText("Enter New Length:");
+        jLabel3.setText("Enter New Width:");
 
-        length.setPreferredSize(new java.awt.Dimension(90, 25));
-        length.addActionListener(new java.awt.event.ActionListener() {
+        width.setPreferredSize(new java.awt.Dimension(90, 25));
+        width.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lengthActionPerformed(evt);
+                widthActionPerformed(evt);
             }
         });
 
@@ -77,12 +74,12 @@ public class RectangleResizeDialogBox extends javax.swing.JDialog {
         });
 
         jLabel4.setFont(new java.awt.Font("Georgia Pro", 0, 14)); // NOI18N
-        jLabel4.setText("Enter New Width:");
+        jLabel4.setText("Enter New Length:");
 
-        width.setPreferredSize(new java.awt.Dimension(90, 25));
-        width.addActionListener(new java.awt.event.ActionListener() {
+        length.setPreferredSize(new java.awt.Dimension(90, 25));
+        length.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                widthActionPerformed(evt);
+                lengthActionPerformed(evt);
             }
         });
 
@@ -99,8 +96,8 @@ public class RectangleResizeDialogBox extends javax.swing.JDialog {
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(width, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(length, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(width, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56))
         );
@@ -110,10 +107,10 @@ public class RectangleResizeDialogBox extends javax.swing.JDialog {
                 .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(length, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(width, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(width, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(length, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -136,14 +133,14 @@ public class RectangleResizeDialogBox extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lengthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lengthActionPerformed
+    private void widthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_widthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lengthActionPerformed
+    }//GEN-LAST:event_widthActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
 
-        String string_l = length.getText();
         String string_w = width.getText();
+        String string_l = length.getText();
 
         if (string_l.isEmpty() || string_w.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Some fields are Empty!", "Message", JOptionPane.INFORMATION_MESSAGE);
@@ -172,9 +169,9 @@ public class RectangleResizeDialogBox extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void widthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_widthActionPerformed
+    private void lengthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lengthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_widthActionPerformed
+    }//GEN-LAST:event_lengthActionPerformed
 
     /**
      * @param args the command line arguments
