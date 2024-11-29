@@ -1,6 +1,7 @@
 
 package Backend;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Map;
@@ -10,6 +11,9 @@ public class Circle extends DefaultShape {
 
     public Circle(Point position,String shapeName,double radius) {
         super(position,shapeName);
+        super.setColor(Color.BLACK);
+        super.setFillColor(Color.WHITE);
+        
         super.properties.put("radius", radius);
         super.properties.put("x2", (double)position.x);
         super.properties.put("y2",(double)position.y);
@@ -40,6 +44,8 @@ public class Circle extends DefaultShape {
         
         canvas.setColor(this.getColor());
         canvas.drawOval((int)(x)-(int)radius,(int)(y)-(int)radius,2*(int)radius, 2*(int)radius);
+        canvas.setColor(this.getFillColor());
+        canvas.fillOval((int)(x)-(int)radius,(int)(y)-(int)radius,2*(int)radius, 2*(int)radius);
         
     }
     
