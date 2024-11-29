@@ -160,11 +160,11 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
 
             Point p = new Point(x, y);
 
-            Map<String, Double> properties = new HashMap<>();
+            Map<String, Double> properties ;
 
             if (ValidateFields.validateCoordinates(x, y)) {
 
-                System.out.println("Shape Name :" + this.shapeToMove.getName());
+                //System.out.println("Shape Name :" + this.shapeToMove.getName());
                 if (this.shapeToMove instanceof Line) {
                     properties=this.shapeToMove.getProperties();
                     
@@ -176,10 +176,11 @@ public class MoveShapeDialogBox extends javax.swing.JDialog {
                     properties.put("y1", (double) p.y);
                     properties.put("x2", properties.get("x2")+x_diff);
                     properties.put("y2", properties.get("y2")+y_diff);
-                    System.out.println("Prop :"+this.shapeToMove.getProperties());
+                    //System.out.println("Prop :"+this.shapeToMove.getProperties());
                     
                     
                 } else {
+                    properties=this.shapeToMove.getProperties();
                     properties.put("x2", (double) p.x);
                     properties.put("y2", (double) p.y);
                     
