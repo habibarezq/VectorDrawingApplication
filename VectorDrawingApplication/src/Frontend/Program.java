@@ -417,12 +417,14 @@ public class Program extends javax.swing.JFrame {
                 Shape[] shapesList = this.shapesManager.getShapes();
                for(Shape s:shapesList)
                {
-                   System.out.println("Name "+s.getName());
+                   //System.out.println("Name "+s.getName());
                 out.writeObject(s);   
                }
 
                 out.close();
                 fileOut.close();
+                
+                JOptionPane.showMessageDialog(null, "Shapes Saved Successfully!", "Message", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
@@ -495,6 +497,9 @@ public class Program extends javax.swing.JFrame {
 
                 in.close();
                 fileIn.close();
+                
+                JOptionPane.showMessageDialog(null, "Shapes Loaded Successfully!", "Message", JOptionPane.INFORMATION_MESSAGE);
+
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
